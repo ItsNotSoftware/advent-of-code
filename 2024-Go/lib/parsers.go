@@ -50,3 +50,34 @@ func Parse2Columns(filename string) ([]int, []int) {
 
 	return col1, col2
 }
+
+func ParseMatrix(filePath string) [][]int {
+	var matrix [][]int
+
+	file, err := os.Open(filePath)
+	if err != nil {
+		panic(err) // Crash if the file cannot be opened
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		line := scanner.Text()
+		stringValues := strings.Fields(line)
+		var row []int
+		for _, str := range stringValues {
+			val, err := strconv.Atoi(str)
+			if err != nil {
+				panic(err) // Crash if a value cannot be converted to an integer
+			}
+			row = append(row, val)
+		}
+		matrix = append(matrix, row)
+	}
+
+	if err := scanner.Err(); err != nil {
+		panic(err) // Crash if an error occurred during scanning
+	}
+
+	return matrix
+}

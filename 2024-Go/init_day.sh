@@ -53,8 +53,3 @@ EOL
 
 touch "${DIR_NAME}/input.txt"
 touch "${DIR_NAME}/example.txt"
-
-cd "$DIR_NAME" || exit
-go mod init "advent/day${DAY}"
-
-echo "Directory and files for day ${DAY} created successfully with templates and a Go module!"
