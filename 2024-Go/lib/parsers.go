@@ -81,3 +81,24 @@ func ParseMatrix(filePath string) [][]int {
 
 	return matrix
 }
+
+func ParseFileAsStr(filePath string) string {
+	file, err := os.Open(filePath)
+	if err != nil {
+		panic(err)
+	}
+	defer file.Close()
+
+	var content strings.Builder
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		content.WriteString(scanner.Text())
+		content.WriteString("\n")
+	}
+
+	if err := scanner.Err(); err != nil {
+		panic(err)
+	}
+
+	return content.String()
+}
