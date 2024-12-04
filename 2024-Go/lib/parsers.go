@@ -102,3 +102,25 @@ func ParseFileAsStr(filePath string) string {
 
 	return content.String()
 }
+
+func ParseCharMatrix(filePath string) [][]rune {
+	var matrix [][]rune
+
+	file, err := os.Open(filePath)
+	if err != nil {
+		panic(err)
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		line := scanner.Text()
+		matrix = append(matrix, []rune(line))
+	}
+
+	if err := scanner.Err(); err != nil {
+		panic(err)
+	}
+
+	return matrix
+}
