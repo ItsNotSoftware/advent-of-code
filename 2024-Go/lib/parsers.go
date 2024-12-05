@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-func Parse2Columns(filename string) ([]int, []int) {
+func Parse2Columns(filename string, separator string) ([]int, []int) {
 	file, err := os.Open(filename)
 	if err != nil {
 		fmt.Printf("Error opening file: %v\n", err)
@@ -22,7 +22,7 @@ func Parse2Columns(filename string) ([]int, []int) {
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		line := scanner.Text()
-		parts := strings.Fields(line)
+		parts := strings.Split(line, separator)
 		if len(parts) != 2 {
 			fmt.Printf("Invalid format in line: %q\n", line)
 			continue
@@ -123,4 +123,24 @@ func ParseCharMatrix(filePath string) [][]rune {
 	}
 
 	return matrix
+}
+
+func ReadLines(filePath string) []string {
+	file, err := os.Open(filePath)
+	if err != nil {
+		return nil
+	}
+	defer file.Close()
+
+	var lines []string
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		lines = append(lines, scanner.Text())
+	}
+
+	if err := scanner.Err(); err != nil {
+		return nil
+	}
+
+	return lines
 }

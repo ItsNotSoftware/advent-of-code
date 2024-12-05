@@ -8,7 +8,7 @@ import (
 )
 
 func part1(filename string) int {
-	list1, list2 := lib.Parse2Columns(filename)
+	list1, list2 := lib.Parse2Columns(filename, "   ")
 	distSum := 0
 
 	sort.Ints(list1)
@@ -22,7 +22,7 @@ func part1(filename string) int {
 }
 
 func part2(filename string) int {
-	list1, list2 := lib.Parse2Columns(filename)
+	list1, list2 := lib.Parse2Columns(filename, "   ")
 	similarityScore := 0
 
 	sort.Ints(list1)
