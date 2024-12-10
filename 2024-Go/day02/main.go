@@ -45,7 +45,7 @@ func isSafe(report []int) bool {
 }
 
 func part1(filename string) int {
-	reports := lib.ParseMatrix(filename)
+	reports := lib.ParseMatrix(filename, true)
 	nSafeReports := 0
 
 	for _, r := range reports {
@@ -58,7 +58,7 @@ func part1(filename string) int {
 }
 
 func part2(filename string) int {
-	reports := lib.ParseMatrix(filename)
+	reports := lib.ParseMatrix(filename, true)
 	nSafeReports := 0
 
 	for _, r := range reports {

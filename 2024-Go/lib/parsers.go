@@ -51,7 +51,7 @@ func Parse2Columns(filename string, separator string) ([]int, []int) {
 	return col1, col2
 }
 
-func ParseMatrix(filePath string) [][]int {
+func ParseMatrix(filePath string, whiteSpace bool) [][]int {
 	var matrix [][]int
 
 	file, err := os.Open(filePath)
@@ -63,7 +63,16 @@ func ParseMatrix(filePath string) [][]int {
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		line := scanner.Text()
-		stringValues := strings.Fields(line)
+
+		var stringValues []string
+		if whiteSpace {
+			stringValues = strings.Fields(line)
+		} else {
+			aux := strings.Fields(line)
+			for _, str := range aux {
+				stringValues = append(stringValues, strings.Split(str, "")...)
+			}
+		}
 		var row []int
 		for _, str := range stringValues {
 			val, err := strconv.Atoi(str)
