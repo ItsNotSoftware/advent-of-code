@@ -11,7 +11,7 @@ func TestPart1(t *testing.T) {
 }
 
 func TestPart2(t *testing.T) {
-	expected := -1
+	expected := 65601038650482
 	result := part2("example.txt")
 	if result != expected {
 		t.Errorf("part2() = %v; want %v", result, expected)
