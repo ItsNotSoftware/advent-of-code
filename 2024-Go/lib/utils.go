@@ -14,6 +14,7 @@ func PrintMat[T any](mat [][]T) {
 	for _, row := range mat {
 		fmt.Println(row)
 	}
+	fmt.Println()
 }
 
 func OrBoolMats(dest, other *[][]bool) {
