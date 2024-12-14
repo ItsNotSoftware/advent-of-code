@@ -1,0 +1,10 @@
+github.com/draffensperger/golp v0.0.0-20241201023928-94a60bf898d2 h1:y10u52tZ6hYiCjExVmaE8fnkhxrCpiTZvNZc7ZIfQgo=
+github.com/draffensperger/golp v0.0.0-20241201023928-94a60bf898d2/go.mod h1:/TbDI9zua4CTUs81AOyDxnKAuvXX/SmOjonijHadP+k=
+github.com/hrautila/matrix v0.0.0-20130603180217-ac1304b29447 h1:Rbb6TFdAIn3YGaqMLATZHLZxB52q06JsQEmxI8G4nmo=
+github.com/hrautila/matrix v0.0.0-20130603180217-ac1304b29447/go.mod h1:VD2DUSSppvJLUirgZWimFj4b1cjMenZ22OI7yki1Y7c=
+golang.org/x/exp v0.0.0-20231110203233-9a3e6036ecaa h1:FRnLl4eNAQl8hwxVVC17teOw8kdjVDVAiFMtgUdTSRQ=
+golang.org/x/exp v0.0.0-20231110203233-9a3e6036ecaa/go.mod h1:zk2irFbV9DP96SEBUUAy67IdHUaZuSnrz1n472HUCLE=
+golang.org/x/tools v0.15.0 h1:zdAyfUGbYmuVokhzVmghFl2ZJh5QhcfebBgmVPFYA+8=
+golang.org/x/tools v0.15.0/go.mod h1:hpksKq4dtpQWS1uQ61JkdqWM3LscIS6Slf+VVkm+wQk=
+gonum.org/v1/gonum v0.15.1 h1:FNy7N6OUZVUaWG9pTiD+jlhdQ3lMP+/LcTpJ6+a8sQ0=
+gonum.org/v1/gonum v0.15.1/go.mod h1:eZTZuRFrzu5pcyjN5wJhcIhnUdNijYxX1T2IcrOGY0o=
