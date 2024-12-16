@@ -17,6 +17,23 @@ func PrintMat[T any](mat [][]T) {
 	fmt.Println()
 }
 
+func PrintRuneMat(mat [][]rune) {
+	fmt.Print("   ")
+	for i := range len(mat[0]) {
+		fmt.Printf("%d", i%10)
+	}
+	fmt.Println()
+
+	for i, row := range mat {
+		fmt.Printf("%02d ", i)
+		for _, cell := range row {
+			fmt.Printf("%c", cell)
+		}
+		fmt.Println()
+	}
+	fmt.Println()
+}
+
 func OrBoolMats(dest, other *[][]bool) {
 	for i := range *other {
 		for j := range (*other)[i] {
