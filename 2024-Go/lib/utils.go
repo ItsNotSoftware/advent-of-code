@@ -17,6 +17,20 @@ func PrintMat[T any](mat [][]T) {
 	fmt.Println()
 }
 
+func PrintBoolMat(mat [][]bool) {
+	for _, row := range mat {
+		for _, b := range row {
+			if b {
+				fmt.Print("#")
+			} else {
+				fmt.Print(".")
+			}
+		}
+		fmt.Println()
+	}
+	fmt.Println()
+}
+
 func PrintRuneMat(mat [][]rune) {
 	fmt.Print("   ")
 	for i := range len(mat[0]) {
