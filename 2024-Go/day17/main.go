@@ -2,14 +2,11 @@ package main
 
 import (
 	"aoc_2024/lib"
-	"context"
 	"fmt"
 	"math"
 	"regexp"
-	"runtime"
 	"strconv"
 	"strings"
-	"sync"
 )
 
 type Opcode int
@@ -26,11 +23,6 @@ const (
 	EXT = -1
 )
 
-type Instruction struct {
-	opcode  Opcode
-	operand int
-}
-
 type Program struct {
 	registers struct {
 		A int
@@ -40,13 +32,6 @@ type Program struct {
 	ip      int
 	output  string
 	program []int
-}
-
-func (p Program) print() {
-	fmt.Printf("Registers: A=%d, B=%d, C=%d\n", p.registers.A, p.registers.B, p.registers.C)
-	fmt.Printf("IP: %d\n", p.ip)
-	fmt.Printf("Program: %v\n", p.program)
-	fmt.Printf("Output: %s\n\n", p.output)
 }
 
 func (p *Program) fetch() (opcode, operandLiteral, operandCombo int) {
@@ -133,54 +118,33 @@ func part1(filename string) string {
 	return output
 }
 
-func part2(filename string) string {
-	program, expected := parseInput(filename)
+// Warning: Weird disassembler + search magic down bellow (custom for my input)
+func findA(program []int, ans int) int {
+	if len(program) == 0 {
+		return ans
+	}
 
-	const maxRange = 20_000_000_000
-	var result int = -1
-	var wg sync.WaitGroup
-	var mu sync.Mutex
+	for t := 0; t < 8; t++ {
+		a := (ans << 3) | t
+		b := a % 8
+		b ^= 1
+		c := a >> b
+		b ^= 5
+		b ^= c
 
-	numWorkers := runtime.NumCPU()
-
-	ctx, cancel := context.WithCancel(context.Background())
-	defer cancel()
-
-	worker := func(ctx context.Context, start, end int) {
-		defer wg.Done()
-		for i := start; i < end; i++ {
-			select {
-			case <-ctx.Done():
-				return
-			default:
-				p := program
-				p.registers.A = i
-				if p.run() == expected {
-					mu.Lock()
-					if result == -1 {
-						result = i
-						cancel()
-					}
-					mu.Unlock()
-					return
-				}
+		if b%8 == program[len(program)-1] {
+			sub := findA(program[:len(program)-1], a)
+			if sub != -1 {
+				return sub
 			}
 		}
 	}
+	return -1
+}
 
-	step := (maxRange + numWorkers - 1) / numWorkers
-	for t := 0; t < numWorkers; t++ {
-		start := t*step + 1
-		end := start + step
-		if end > maxRange+1 {
-			end = maxRange + 1
-		}
-		wg.Add(1)
-		go worker(ctx, start, end)
-	}
-
-	wg.Wait()
-	return strconv.Itoa(result)
+func part2(filename string) int {
+	program, _ := parseInput(filename)
+	return findA(program.program, 0)
 }
 
 func main() {
