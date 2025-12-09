@@ -8,7 +8,7 @@
 
 using namespace std;
 
-vector<string> read_lines(const string& file) {
+vector<string> read_file(const string& file) {
     ifstream f(file);
     if (!f.is_open()) {
         cerr << "Error opening " << file << "\n";
@@ -64,7 +64,7 @@ int main(int argc, char** argv) {
     bool example = (argc > 1 && string(argv[1]) == "--example");
     string filename = example ? "example.txt" : "input.txt";
 
-    auto lines = read_lines(filename);
+    auto lines = read_file(filename);
     auto p1 = part1(lines);
     auto p2 = part2(lines);
 
